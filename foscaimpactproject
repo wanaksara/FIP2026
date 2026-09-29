@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FOSCA Impact Project (FIP) 2026</title>
+    <meta name="description" content="Kompetisi riset dan Karya Tulis Ilmiah (KTI) Tingkat Nasional oleh Forum of Scientish Teenagers (FOSCA).">
+    
+    <!-- Fonts & Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            dark: '#005461',
+                            teal: '#018790',
+                            bright: '#00B7B5',
+                            light: '#E6F7F7',
+                            gold: '#F59E0B'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.6s ease-out forwards',
+                        'bounce-slow': 'bounce 3s infinite',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0', transform: 'translateY(15px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f8fafc; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        .text-gradient {
+            background: linear-gradient(135deg, #005461 0%, #00B7B5 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .text-gradient-gold {
+            background: linear-gradient(135deg, #D97706 0%, #FBBF24 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* File Input Styling */
+        input[type="file"]::file-selector-button {
+            border: none;
+            background: #005461;
+            padding: 8px 16px;
+            border-radius: 8px;
+            color: white;
+            cursor: pointer;
+            transition: background .2s ease-in-out;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        input[type="file"]::file-selector-button:hover { background: #018790; }
+    </style>
+</head>
+<body class="antialiased bg-slate-50 text-slate-800">
+
+    <!-- HEADER -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm transition-all">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16 sm:h-20">
+                <div class="flex items-center">
+                    <a href="#" class="bg-brand-dark px-3 py-2 rounded-xl flex items-center space-x-2.5 sm:space-x-3 transition hover:bg-brand-teal shadow-md">
+                        <img src="https://iili.io/nRqcn99.png" alt="Mitra" class="h-6 sm:h-8 w-auto brightness-0 invert object-contain">
+                        <span class="h-4 sm:h-5 w-[1px] bg-white/30"></span>
+                        <img src="https://iili.io/nAJ6FF2.png" alt="FOSCA" class="h-6 sm:h-8 w-auto brightness-0 invert object-contain">
+                        <span class="h-4 sm:h-5 w-[1px] bg-white/30"></span>
+                        <img src="https://iili.io/nAJanfI.png" alt="FIP" class="h-6 sm:h-8 w-auto brightness-0 invert object-contain">
+                    </a>
+                </div>
+
+                <!-- Desktop Menu -->
+                <nav class="hidden md:flex space-x-8 text-sm font-bold text-slate-600">
+                    <a href="#tentang" class="hover:text-brand-teal transition-colors">Tentang FIP</a>
+                    <a href="#timeline" class="hover:text-brand-teal transition-colors">Timeline</a>
+                    <a href="#syarat" class="hover:text-brand-teal transition-colors">Syarat</a>
+                    <a href="#benefit" class="hover:text-brand-teal transition-colors">Benefit</a>
+                </nav>
+
+                <div class="flex items-center space-x-3">
+                    <button onclick="scrollToForm()" class="hidden sm:flex bg-brand-dark hover:bg-brand-teal text-white font-bold text-sm px-5 py-2.5 rounded-xl transition shadow-md items-center gap-2">
+                        <i class="fa-solid fa-pen-to-square"></i> Daftar Sekarang
+                    </button>
+                    <button id="mobileMenuBtn" class="md:hidden text-slate-700 p-2 rounded-lg hover:bg-slate-100 transition">
+                        <i class="fa-solid fa-bars text-xl" id="menuIcon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="hidden md:hidden bg-white border-b border-slate-200 px-4 pt-2 pb-6 space-y-2 shadow-lg absolute w-full">
+            <a href="#tentang" class="mobile-link block py-3 px-4 rounded-xl text-slate-700 font-bold hover:bg-slate-50"><i class="fa-solid fa-circle-info text-brand-teal w-6"></i> Tentang FIP</a>
+            <a href="#timeline" class="mobile-link block py-3 px-4 rounded-xl text-slate-700 font-bold hover:bg-slate-50"><i class="fa-solid fa-calendar-days text-brand-teal w-6"></i> Timeline</a>
+            <a href="#syarat" class="mobile-link block py-3 px-4 rounded-xl text-slate-700 font-bold hover:bg-slate-50"><i class="fa-solid fa-list-check text-brand-teal w-6"></i> Syarat & Ketentuan</a>
+            <a href="#benefit" class="mobile-link block py-3 px-4 rounded-xl text-slate-700 font-bold hover:bg-slate-50"><i class="fa-solid fa-gift text-brand-teal w-6"></i> Benefit & Hadiah</a>
+            <button onclick="scrollToForm(); document.getElementById('mobileMenu').classList.add('hidden'); document.getElementById('menuIcon').className = 'fa-solid fa-bars text-xl';" class="w-full mt-4 py-3 px-4 rounded-xl bg-brand-dark text-white font-bold text-center shadow-md flex items-center justify-center gap-2">
+                <i class="fa-solid fa-pen-to-square"></i> Formulir Pendaftaran
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <!-- HERO SECTION -->
+        <section class="relative pt-12 pb-16 sm:pt-20 sm:pb-24 overflow-hidden bg-white">
+            <div class="absolute top-[-10%] left-[-10%] w-96 h-96 bg-brand-teal/10 rounded-full blur-3xl -z-10"></div>
+            <div class="absolute bottom-[-10%] right-[-10%] w-96 h-96 bg-emerald-400/10 rounded-full blur-3xl -z-10"></div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+                <div class="inline-flex items-center gap-2 bg-emerald-100 border border-emerald-300 text-emerald-800 text-xs sm:text-sm font-bold px-4 py-2 rounded-full mb-6 opacity-0 animate-fade-in">
+                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                    <span>Pendaftaran & Submission Abstrak Dibuka!</span>
+                </div>
+
+                <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 leading-tight mb-6 opacity-0 animate-fade-in" style="animation-delay: 0.1s;">
+                    FOSCA IMPACT PROJECT <br class="hidden sm:block"> <span class="text-gradient">(FIP) 2026</span>
+                </h1>
+
+                <p class="text-sm sm:text-base font-medium text-slate-600 max-w-2xl mx-auto mb-8 opacity-0 animate-fade-in" style="animation-delay: 0.2s;">
+                    Kompetisi riset dan Karya Tulis Ilmiah (KTI) Tingkat Nasional oleh <strong>Forum of Scientish Teenagers (FOSCA)</strong> untuk pelajar SMA/SMK/MA sederajat.
+                </p>
+
+                <div class="bg-slate-50 border-l-4 border-brand-dark shadow-md rounded-2xl p-5 max-w-3xl mx-auto mb-10 opacity-0 animate-fade-in" style="animation-delay: 0.3s;">
+                    <span class="text-xs font-bold uppercase tracking-widest text-brand-teal block mb-2">Tema Utama FIP 2026</span>
+                    <h2 class="text-base sm:text-xl font-extrabold text-slate-800 italic leading-snug">
+                        “Empowering Young Researchers for Environmental Sustainability”
+                    </h2>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12 opacity-0 animate-fade-in" style="animation-delay: 0.4s;">
+                    <button onclick="scrollToForm()" class="w-full sm:w-auto bg-brand-dark hover:bg-brand-teal text-white font-extrabold text-sm px-8 py-4 rounded-xl shadow-lg transition transform hover:-translate-y-1 flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-paper-plane"></i> Daftar Sekarang
+                    </button>
+                    <a href="https://kirfosca.com/GuidelineFIP26" target="_blank" class="w-full sm:w-auto bg-white hover:bg-slate-50 border-2 border-slate-200 text-slate-700 font-bold text-sm px-8 py-4 rounded-xl transition flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-book text-brand-teal"></i> Download Guideline
+                    </a>
+                    <a href="https://kirfosca.com/TwibbonFIP26" target="_blank" class="w-full sm:w-auto bg-white hover:bg-slate-50 border-2 border-slate-200 text-slate-700 font-bold text-sm px-8 py-4 rounded-xl transition flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-image text-brand-teal"></i> Download Twibbon
+                    </a>
+                </div>
+
+                <!-- Countdown Timer -->
+                <div class="bg-slate-900 text-white rounded-3xl p-6 shadow-2xl max-w-xl mx-auto border border-slate-800 opacity-0 animate-fade-in" style="animation-delay: 0.5s;">
+                    <div class="text-xs font-bold text-brand-bright uppercase tracking-widest mb-4 flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-hourglass-half animate-spin-slow"></i> Batas Akhir Pengumpulan Abstrak (13 OKT 2026)
+                    </div>
+                    <div class="grid grid-cols-4 gap-3 sm:gap-4 text-center">
+                        <div class="bg-slate-800 p-3 rounded-2xl border border-slate-700">
+                            <span class="text-2xl sm:text-4xl font-black block" id="cd-days">00</span>
+                            <span class="text-[10px] sm:text-xs text-slate-400 font-bold uppercase mt-1 block">Hari</span>
+                        </div>
+                        <div class="bg-slate-800 p-3 rounded-2xl border border-slate-700">
+                            <span class="text-2xl sm:text-4xl font-black block" id="cd-hours">00</span>
+                            <span class="text-[10px] sm:text-xs text-slate-400 font-bold uppercase mt-1 block">Jam</span>
+                        </div>
+                        <div class="bg-slate-800 p-3 rounded-2xl border border-slate-700">
+                            <span class="text-2xl sm:text-4xl font-black block" id="cd-mins">00</span>
+                            <span class="text-[10px] sm:text-xs text-slate-400 font-bold uppercase mt-1 block">Menit</span>
+                        </div>
+                        <div class="bg-slate-800 p-3 rounded-2xl border border-slate-700">
+                            <span class="text-2xl sm:text-4xl font-black text-brand-bright block" id="cd-secs">00</span>
+                            <span class="text-[10px] sm:text-xs text-slate-400 font-bold uppercase mt-1 block">Detik</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ABOUT SECTION -->
+        <section id="tentang" class="py-16 sm:py-24 bg-slate-50 border-t border-slate-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <span class="text-brand-dark font-bold text-xs uppercase tracking-widest bg-brand-light px-3 py-1.5 rounded-full mb-4 inline-block">Tentang FIP</span>
+                        <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mb-6 leading-tight">Wadah Inovasi Riset Bagi Peneliti Muda Indonesia</h2>
+                        <p class="text-slate-600 mb-4 text-sm sm:text-base leading-relaxed text-justify">
+                            <strong>FOSCA IMPACT PROJECT (FIP) 2026</strong> merupakan program kerja inovatif FOSCA Angkatan 20 yang dikemas dalam bentuk kompetisi riset dan Karya Tulis Ilmiah (KTI). Nama ini merepresentasikan semangat FOSCA dalam mendorong pelajar untuk tidak hanya mengidentifikasi permasalahan, tetapi juga mengembangkan gagasan dan solusi berbasis penelitian yang dapat memberikan dampak nyata.
+                        </p>
+                        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm mt-6">
+                            <h4 class="font-bold text-slate-900 mb-3 flex items-center gap-2"><i class="fa-solid fa-cubes text-brand-teal"></i> Bentuk Karya</h4>
+                            <p class="text-xs sm:text-sm text-slate-600 mb-3">Bentuk karya yang diajukan dapat berupa:</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-slate-100 text-slate-700 text-xs font-bold px-3 py-1.5 rounded-lg border border-slate-200">Prototipe Fisik</span>
+                                <span class="bg-slate-100 text-slate-700 text-xs font-bold px-3 py-1.5 rounded-lg border border-slate-200">Analisis Data</span>
+                                <span class="bg-slate-100 text-slate-700 text-xs font-bold px-3 py-1.5 rounded-lg border border-slate-200">Inovasi Teknologi</span>
+                                <span class="bg-slate-100 text-slate-700 text-xs font-bold px-3 py-1.5 rounded-lg border border-slate-200">Model Terapan</span>
+                                <span class="bg-slate-100 text-slate-700 text-xs font-bold px-3 py-1.5 rounded-lg border border-slate-200">Strategi Kebijakan</span>
+                                <span class="bg-slate-100 text-slate-700 text-xs font-bold px-3 py-1.5 rounded-lg border border-slate-200">Gagasan Tertulis</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-brand-dark rounded-3xl p-8 text-white shadow-xl relative overflow-hidden">
+                        <i class="fa-solid fa-bullseye absolute -right-6 -bottom-6 text-9xl text-white/10"></i>
+                        <h3 class="text-2xl font-bold mb-6 relative z-10 flex items-center gap-3">
+                            <i class="fa-solid fa-flag-checkered text-brand-bright"></i> Tujuan Kegiatan
+                        </h3>
+                        <ul class="space-y-4 relative z-10 text-sm sm:text-base text-slate-200">
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-circle-check text-brand-bright mt-1"></i>
+                                <span>Menjadi wadah bagi siswa dalam mengembangkan kemampuan penelitian.</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-circle-check text-brand-bright mt-1"></i>
+                                <span>Mendorong siswa untuk peka terhadap permasalahan lingkungan.</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-circle-check text-brand-bright mt-1"></i>
+                                <span>Mengembangkan kreativitas dan inovasi siswa melalui sains dan teknologi.</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-circle-check text-brand-bright mt-1"></i>
+                                <span>Mendorong lahirnya gagasan teknologi yang mendukung keberlanjutan lingkungan.</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-circle-check text-brand-bright mt-1"></i>
+                                <span>Meningkatkan kemampuan siswa dalam menyampaikan gagasan ilmiah.</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-circle-check text-brand-bright mt-1"></i>
+                                <span>Membangun pengalaman penelitian bagi generasi muda.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TOPICS SECTION -->
+        <section class="py-16 sm:py-24 bg-white border-t border-slate-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-12">
+                    <span class="text-brand-dark font-bold text-xs uppercase tracking-widest bg-brand-light px-4 py-1.5 rounded-full">INTERACTIVE TOPIC EXPLORER</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-4 mb-4">5 Subtema Riset FIP 2026</h2>
+                    <p class="text-slate-600 text-sm sm:text-base">Setiap tim wajib memilih salah satu dari subtema berikut sebagai basis utama pengembangan karya mereka.</p>
+                </div>
+
+                <div class="grid lg:grid-cols-12 gap-8 items-start">
+                    <!-- Topic Buttons -->
+                    <div class="lg:col-span-5 flex flex-col gap-3">
+                        <button onclick="selectTopic(1)" id="btn-topik-1" class="topic-btn w-full text-left px-5 py-4 rounded-2xl font-bold text-sm border-2 transition-all bg-brand-dark text-white border-brand-dark shadow-md flex items-center justify-between">
+                            <span class="flex items-center gap-3"><i class="fa-solid fa-recycle text-emerald-400 text-lg w-6"></i> Waste & Circular Economy</span>
+                            <i class="fa-solid fa-chevron-right opacity-50"></i>
+                        </button>
+                        <button onclick="selectTopic(2)" id="btn-topik-2" class="topic-btn w-full text-left px-5 py-4 rounded-2xl font-bold text-sm border-2 transition-all bg-white text-slate-600 border-slate-200 hover:border-brand-teal flex items-center justify-between">
+                            <span class="flex items-center gap-3"><i class="fa-solid fa-smog text-sky-500 text-lg w-6"></i> Pollution & Env. Health</span>
+                            <i class="fa-solid fa-chevron-right opacity-50"></i>
+                        </button>
+                        <button onclick="selectTopic(3)" id="btn-topik-3" class="topic-btn w-full text-left px-5 py-4 rounded-2xl font-bold text-sm border-2 transition-all bg-white text-slate-600 border-slate-200 hover:border-brand-teal flex items-center justify-between">
+                            <span class="flex items-center gap-3"><i class="fa-solid fa-bolt text-amber-500 text-lg w-6"></i> Climate & Energy</span>
+                            <i class="fa-solid fa-chevron-right opacity-50"></i>
+                        </button>
+                        <button onclick="selectTopic(4)" id="btn-topik-4" class="topic-btn w-full text-left px-5 py-4 rounded-2xl font-bold text-sm border-2 transition-all bg-white text-slate-600 border-slate-200 hover:border-brand-teal flex items-center justify-between">
+                            <span class="flex items-center gap-3"><i class="fa-solid fa-leaf text-green-600 text-lg w-6"></i> Biodiversity & Conservation</span>
+                            <i class="fa-solid fa-chevron-right opacity-50"></i>
+                        </button>
+                        <button onclick="selectTopic(5)" id="btn-topik-5" class="topic-btn w-full text-left px-5 py-4 rounded-2xl font-bold text-sm border-2 transition-all bg-white text-slate-600 border-slate-200 hover:border-brand-teal flex items-center justify-between">
+                            <span class="flex items-center gap-3"><i class="fa-solid fa-users-line text-indigo-500 text-lg w-6"></i> Sustainable Society & Lifestyle</span>
+                            <i class="fa-solid fa-chevron-right opacity-50"></i>
+                        </button>
+                    </div>
+                    
+                    <!-- Topic Content -->
+                    <div class="lg:col-span-7">
+                        <div class="bg-slate-900 rounded-3xl p-6 sm:p-10 shadow-2xl h-full flex flex-col justify-center min-h-[300px]">
+                            <span id="topic-badge" class="inline-block px-3 py-1 bg-brand-bright/20 text-brand-bright font-mono text-xs uppercase font-bold rounded-lg mb-4 w-max">Subtema A</span>
+                            <h3 id="topic-title" class="text-2xl sm:text-3xl font-extrabold text-white mb-4 transition-all">Waste & Circular Economy</h3>
+                            <p id="topic-desc" class="text-slate-300 text-sm sm:text-base leading-relaxed">Penelitian dan inovasi terkait pengelolaan sampah, daur ulang, serta penerapan prinsip ekonomi sirkular.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TIMELINE SECTION -->
+        <section id="timeline" class="py-16 sm:py-24 bg-slate-100 border-y border-slate-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <span class="text-brand-dark font-bold text-xs uppercase tracking-widest bg-brand-light px-4 py-1.5 rounded-full">ROADMAP</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-4">Timeline FIP 2026</h2>
+                </div>
+                
+                <div class="grid grid-cols-2 lg:grid-cols-6 gap-4">
+                    <div class="bg-white p-5 rounded-2xl shadow-sm border-b-4 border-b-emerald-500 text-center hover:-translate-y-1 transition">
+                        <div class="text-2xl sm:text-3xl font-black text-slate-900 mb-1">26 SEP</div>
+                        <div class="text-[10px] font-bold text-emerald-600 bg-emerald-50 py-1 rounded mb-2">ONLINE</div>
+                        <h4 class="font-bold text-xs sm:text-sm text-slate-800">Open Registration & Submission Abstrak</h4>
+                    </div>
+                    <div class="bg-white p-5 rounded-2xl shadow-sm border-b-4 border-b-sky-500 text-center hover:-translate-y-1 transition">
+                        <div class="text-2xl sm:text-3xl font-black text-slate-900 mb-1">10 OKT</div>
+                        <div class="text-[10px] font-bold text-sky-600 bg-sky-50 py-1 rounded mb-2">ONLINE</div>
+                        <h4 class="font-bold text-xs sm:text-sm text-slate-800">Coaching Clinic</h4>
+                    </div>
+                    <div class="bg-white p-5 rounded-2xl shadow-sm border-b-4 border-b-rose-500 text-center hover:-translate-y-1 transition relative">
+                        <div class="text-2xl sm:text-3xl font-black text-slate-900 mb-1">13 OKT</div>
+                        <div class="text-[10px] font-bold text-rose-600 bg-rose-50 py-1 rounded mb-2">ONLINE</div>
+                        <h4 class="font-bold text-xs sm:text-sm text-slate-800">Deadline Submission Abstrak</h4>
+                    </div>
+                    <div class="bg-white p-5 rounded-2xl shadow-sm border-b-4 border-b-amber-500 text-center hover:-translate-y-1 transition">
+                        <div class="text-2xl sm:text-3xl font-black text-slate-900 mb-1">18 OKT</div>
+                        <div class="text-[10px] font-bold text-amber-600 bg-amber-50 py-1 rounded mb-2">ONLINE</div>
+                        <h4 class="font-bold text-xs sm:text-sm text-slate-800">Announcement Finalist</h4>
+                    </div>
+                    <div class="bg-white p-5 rounded-2xl shadow-sm border-b-4 border-b-indigo-500 text-center hover:-translate-y-1 transition">
+                        <div class="text-2xl sm:text-3xl font-black text-slate-900 mb-1">19 NOV</div>
+                        <div class="text-[10px] font-bold text-indigo-600 bg-indigo-50 py-1 rounded mb-2">ONLINE</div>
+                        <h4 class="font-bold text-xs sm:text-sm text-slate-800">Deadline Laporan KTI</h4>
+                    </div>
+                    <div class="bg-brand-dark p-5 rounded-2xl shadow-lg border-b-4 border-b-brand-bright text-center hover:-translate-y-1 transition text-white">
+                        <div class="text-2xl sm:text-3xl font-black mb-1">21 NOV</div>
+                        <div class="text-[10px] font-bold text-brand-dark bg-brand-light py-1 rounded mb-2">OFFLINE</div>
+                        <h4 class="font-bold text-xs sm:text-sm">Grand Final & Winner Announcement</h4>
+                        <p class="text-[10px] mt-2 text-brand-light leading-tight">Taman Ismail Marzuki, Jakarta</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SYARAT SECTION -->
+        <section id="syarat" class="py-16 sm:py-24 bg-white">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-10">
+                    <h2 class="text-3xl font-extrabold text-slate-900 flex items-center justify-center gap-3">
+                        <i class="fa-solid fa-list-check text-brand-teal"></i> Syarat & Ketentuan Peserta
+                    </h2>
+                </div>
+                
+                <div class="bg-slate-50 border border-slate-200 rounded-3xl p-6 sm:p-10 shadow-sm">
+                    <ul class="space-y-4 text-sm sm:text-base text-slate-700">
+                        <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-brand-teal mt-1"></i> <span>Peserta merupakan siswa/i aktif SMA/SMK/MA sederajat.</span></li>
+                        <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-brand-teal mt-1"></i> <span>Peserta mengikuti kompetisi dalam tim yang terdiri dari <strong>2 orang</strong>. 1 sekolah maksimal mengirimkan <strong>2 tim</strong>.</span></li>
+                        <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-brand-teal mt-1"></i> <span>Setiap tim wajib mengangkat penelitian yang sesuai dengan tema dan isu FIP 2026.</span></li>
+                        <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-brand-teal mt-1"></i> <span>Setiap anggota tim <strong>wajib upload twibbon</strong>.</span></li>
+                        <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-brand-teal mt-1"></i> <span>Karya yang dikumpulkan harus merupakan karya orisinal dan belum pernah menjadi juara dalam kompetisi lain.</span></li>
+                        <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-brand-teal mt-1"></i> <span>Dilarang melakukan plagiarisme, termasuk menyalin karya, data, ide, atau tulisan pihak lain tanpa mencantumkan sumber.</span></li>
+                        <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-brand-teal mt-1"></i> <span>Setiap sumber yang digunakan dalam penelitian wajib dicantumkan sesuai kaidah sitasi.</span></li>
+                        <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-brand-teal mt-1"></i> <span>Data dan hasil penelitian harus jujur, dapat dipertanggungjawabkan, dan tidak direkayasa.</span></li>
+                        <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-brand-teal mt-1"></i> <span>Peserta wajib mengikuti seluruh tahapan dan ketentuan kompetisi sesuai timeline yang telah ditetapkan.</span></li>
+                        <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-brand-teal mt-1"></i> <span>Peserta wajib mengikuti Coaching Clinic dan tahapan seleksi sesuai ketentuan panitia. Keputusan dewan juri bersifat final dan tidak dapat diganggu gugat.</span></li>
+                    </ul>
+                    <div class="mt-8 p-4 bg-amber-50 border border-amber-200 rounded-xl text-center">
+                        <p class="font-extrabold text-amber-800 text-base sm:text-lg">Setiap Tim dikenakan biaya pendaftaran (HTM) sebesar Rp140.000</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- BENEFIT SECTION -->
+        <section id="benefit" class="py-16 sm:py-24 bg-slate-900 border-t border-slate-800">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <span class="text-brand-bright font-bold text-xs uppercase tracking-widest bg-brand-dark px-4 py-1.5 rounded-full">REWARDS</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-4">Benefit & Penghargaan</h2>
+                </div>
+
+                <div class="grid lg:grid-cols-3 gap-6 sm:gap-8 items-stretch">
+                    <!-- Peserta -->
+                    <div class="bg-slate-800 rounded-3xl p-6 sm:p-8 border border-slate-700 flex flex-col h-full hover:-translate-y-2 transition-transform duration-300">
+                        <div class="w-14 h-14 bg-slate-700 rounded-2xl flex items-center justify-center text-2xl text-white mb-6"><i class="fa-solid fa-users"></i></div>
+                        <h3 class="text-2xl font-bold text-white mb-4">Seluruh Peserta</h3>
+                        <ul class="space-y-3 text-sm text-slate-300 flex-1">
+                            <li class="flex items-start gap-3"><i class="fa-solid fa-check text-emerald-400 mt-1"></i> <span>Sertifikat Peserta FIP 2026</span></li>
+                            <li class="flex items-start gap-3"><i class="fa-solid fa-check text-emerald-400 mt-1"></i> <span>Kesempatan mengikuti Coaching Clinic bersama Medalis OPSI 2025</span></li>
+                            <li class="flex items-start gap-3"><i class="fa-solid fa-check text-emerald-400 mt-1"></i> <span>PPT/materi Coaching Clinic</span></li>
+                            <li class="flex items-start gap-3"><i class="fa-solid fa-check text-emerald-400 mt-1"></i> <span>Pengalaman & insight mengembangkan penelitian</span></li>
+                        </ul>
+                    </div>
+
+                    <!-- Finalis -->
+                    <div class="bg-brand-dark rounded-3xl p-6 sm:p-8 border border-brand-teal flex flex-col h-full shadow-2xl shadow-brand-teal/20 hover:-translate-y-2 transition-transform duration-300 relative overflow-hidden transform lg:scale-105 z-10">
+                        <div class="absolute top-0 right-0 bg-brand-teal text-white text-[10px] font-bold px-3 py-1 rounded-bl-xl uppercase tracking-wider">Top 15 Tim</div>
+                        <div class="w-14 h-14 bg-brand-teal rounded-2xl flex items-center justify-center text-2xl text-white mb-6"><i class="fa-solid fa-star"></i></div>
+                        <h3 class="text-2xl font-bold text-white mb-4">Finalis</h3>
+                        <ul class="space-y-3 text-sm text-brand-light flex-1">
+                            <li class="flex items-start gap-3"><i class="fa-solid fa-check text-brand-bright mt-1"></i> <span>Sertifikat Finalis</span></li>
+                            <li class="flex items-start gap-3"><i class="fa-solid fa-check text-brand-bright mt-1"></i> <span>Official FIP ID Card & Lanyard</span></li>
+                            <li class="flex items-start gap-3"><i class="fa-solid fa-check text-brand-bright mt-1"></i> <span>Official Souvenir FIP</span></li>
+                            <li class="flex items-start gap-3"><i class="fa-solid fa-check text-brand-bright mt-1"></i> <span>KTI Exhibition (Pameran Karya)</span></li>
+                            <li class="flex items-start gap-3"><i class="fa-solid fa-check text-brand-bright mt-1"></i> <span>Lunch box Grand Final</span></li>
+                            <li class="flex items-start gap-3"><i class="fa-solid fa-check text-brand-bright mt-1"></i> <span>Insight dan feedback dari Dewan Juri</span></li>
+                            <li class="flex items-start gap-3"><i class="fa-solid fa-check text-brand-bright mt-1"></i> <span>Networking opportunity dengan peneliti muda, juri & narasumber</span></li>
+                        </ul>
+                    </div>
+
+                    <!-- Pemenang -->
+                    <div class="bg-gradient-to-b from-[#FFFBEB] to-white rounded-3xl p-6 sm:p-8 border border-amber-200 flex flex-col h-full hover:-translate-y-2 transition-transform duration-300">
+                        <div class="w-14 h-14 bg-amber-100 rounded-2xl flex items-center justify-center text-2xl text-amber-500 mb-6"><i class="fa-solid fa-trophy"></i></div>
+                        <h3 class="text-2xl font-bold text-slate-900 mb-4">Pemenang</h3>
+                        
+                        <div class="space-y-4 flex-1">
+                            <div class="bg-white p-3 rounded-xl border border-amber-100 shadow-sm">
+                                <div class="font-black text-amber-500 mb-1 flex items-center gap-2"><i class="fa-solid fa-medal"></i> Juara 1</div>
+                                <div class="text-xs text-slate-600 font-medium">Uang pembinaan Rp1.500.000, Piala, Sertifikat Juara 1</div>
+                            </div>
+                            <div class="bg-white p-3 rounded-xl border border-slate-200 shadow-sm">
+                                <div class="font-black text-slate-400 mb-1 flex items-center gap-2"><i class="fa-solid fa-medal"></i> Juara 2</div>
+                                <div class="text-xs text-slate-600 font-medium">Uang pembinaan Rp1.000.000, Piala, Sertifikat Juara 2</div>
+                            </div>
+                            <div class="bg-white p-3 rounded-xl border border-orange-200 shadow-sm">
+                                <div class="font-black text-orange-600 mb-1 flex items-center gap-2"><i class="fa-solid fa-medal"></i> Juara 3</div>
+                                <div class="text-xs text-slate-600 font-medium">Uang pembinaan Rp500.000, Piala, Sertifikat Juara 3</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- REGISTRATION FORM SECTION -->
+        <section id="pendaftaran" class="py-16 sm:py-24 bg-slate-50 border-t border-slate-200 scroll-mt-10">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="bg-white rounded-3xl shadow-xl overflow-hidden border border-slate-200">
+                    
+                    <!-- Header Form -->
+                    <div id="formHeader" class="bg-gradient-to-r from-brand-dark to-brand-teal p-6 sm:p-10 text-white transition-all">
+                        <span class="inline-block px-3 py-1 bg-white/20 text-white font-bold text-xs rounded-full mb-3">FORMULIR ONLINE</span>
+                        <h2 class="text-2xl sm:text-3xl font-extrabold mb-1">Pendaftaran FIP 2026</h2>
+                        <p class="text-brand-light text-sm">Isi data tim secara bertahap (3 Langkah).</p>
+
+                        <div class="mt-8 relative max-w-md mx-auto">
+                            <div class="absolute top-1/2 left-0 w-full h-1 bg-white/20 -translate-y-1/2 rounded-full"></div>
+                            <div class="relative flex justify-between">
+                                <div class="flex flex-col items-center gap-2 relative z-10 transition-opacity duration-300" id="step-ind-1">
+                                    <div class="w-10 h-10 rounded-full bg-white text-brand-dark font-extrabold flex items-center justify-center shadow-lg transition-colors" id="step-badge-1">1</div>
+                                    <span class="text-[10px] sm:text-xs font-bold text-white">Info Tim</span>
+                                </div>
+                                <div class="flex flex-col items-center gap-2 relative z-10 opacity-50 transition-opacity duration-300" id="step-ind-2">
+                                    <div class="w-10 h-10 rounded-full bg-slate-800/50 text-white font-extrabold flex items-center justify-center transition-colors" id="step-badge-2">2</div>
+                                    <span class="text-[10px] sm:text-xs font-bold text-white">Identitas (2 Org)</span>
+                                </div>
+                                <div class="flex flex-col items-center gap-2 relative z-10 opacity-50 transition-opacity duration-300" id="step-ind-3">
+                                    <div class="w-10 h-10 rounded-full bg-slate-800/50 text-white font-extrabold flex items-center justify-center transition-colors" id="step-badge-3">3</div>
+                                    <span class="text-[10px] sm:text-xs font-bold text-white">Pembayaran</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="formAlert" class="hidden mx-6 mt-6 p-4 bg-rose-50 border-l-4 border-rose-500 text-rose-800 rounded-r-xl text-sm font-medium flex items-center justify-between">
+                        <span id="formAlertText" class="flex items-center gap-2"><i class="fa-solid fa-circle-exclamation text-rose-500"></i> Alert</span>
+                        <button onclick="document.getElementById('formAlert').classList.add('hidden')" class="text-rose-500 hover:text-rose-700 px-2"><i class="fa-solid fa-xmark"></i></button>
+                    </div>
+
+                    <!-- FORM -->
+                    <form id="fipForm" onsubmit="submitForm(event)" class="p-6 sm:p-10">
+                        
+                        <!-- STEP 1 -->
+                        <div id="step-1" class="space-y-6 animate-fade-in">
+                            <h3 class="text-lg font-bold text-slate-800 border-b pb-2">Informasi Sekolah & Tim</h3>
+                            
+                            <div class="grid sm:grid-cols-2 gap-5">
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-700 uppercase mb-1.5">Email Kontak (Aktif) <span class="text-rose-500">*</span></label>
+                                    <input type="email" id="email" required placeholder="email@gmail.com" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brand-teal focus:ring-1 focus:ring-brand-teal transition">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-700 uppercase mb-1.5">Asal Sekolah <span class="text-rose-500">*</span></label>
+                                    <input type="text" id="asalSekolah" required placeholder="Contoh: SMAN 1 Jakarta" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brand-teal focus:ring-1 focus:ring-brand-teal transition">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-700 uppercase mb-1.5">No. WA Ketua/Perwakilan <span class="text-rose-500">*</span></label>
+                                    <input type="tel" id="nomorCP" required placeholder="08xxxxxxxxxx" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brand-teal focus:ring-1 focus:ring-brand-teal transition">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-700 uppercase mb-1.5">Dari mana tahu FIP 2026? <span class="text-rose-500">*</span></label>
+                                    <select id="sumberInfo" required class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brand-teal focus:ring-1 focus:ring-brand-teal transition appearance-none">
+                                        <option value="" disabled selected>-- Pilih --</option>
+                                        <option value="Guru / Sekolah">Guru / Sekolah</option>
+                                        <option value="Teman">Teman</option>
+                                        <option value="Sosial Media">Sosial Media</option>
+                                    </select>
+                                </div>
+                                <div class="sm:col-span-2">
+                                    <label class="block text-xs font-bold text-slate-700 uppercase mb-1.5">Link Bukti Upload Twibbon <span class="text-rose-500">*</span></label>
+                                    <input type="url" id="linkTwibbon" required placeholder="https://instagram.com/p/... atau Link Drive" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brand-teal focus:ring-1 focus:ring-brand-teal transition">
+                                    <p class="text-[10px] text-slate-500 mt-1">Sesuai Guidebook: Setiap anggota tim wajib upload twibbon.</p>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-700 uppercase mb-1.5">Perwakilan Kategori <span class="text-rose-500">*</span></label>
+                                    <div class="grid grid-cols-2 gap-3">
+                                        <label class="flex items-center gap-2 p-3 border border-slate-300 rounded-xl cursor-pointer hover:bg-brand-light transition bg-slate-50"><input type="radio" name="perwakilanKIR" value="SMA" class="accent-brand-dark w-4 h-4"><span class="text-sm font-bold text-slate-700">SMA/MA</span></label>
+                                        <label class="flex items-center gap-2 p-3 border border-slate-300 rounded-xl cursor-pointer hover:bg-brand-light transition bg-slate-50"><input type="radio" name="perwakilanKIR" value="SMK" class="accent-brand-dark w-4 h-4"><span class="text-sm font-bold text-slate-700">SMK</span></label>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-700 uppercase mb-1.5">Pilihan Tim <span class="text-rose-500">*</span></label>
+                                    <div class="grid grid-cols-2 gap-3">
+                                        <label class="flex items-center gap-2 p-3 border border-slate-300 rounded-xl cursor-pointer hover:bg-brand-light transition bg-slate-50"><input type="radio" name="pilihanTim" value="Tim 1" class="accent-brand-dark w-4 h-4"><span class="text-sm font-bold text-slate-700">Tim 1</span></label>
+                                        <label class="flex items-center gap-2 p-3 border border-slate-300 rounded-xl cursor-pointer hover:bg-brand-light transition bg-slate-50"><input type="radio" name="pilihanTim" value="Tim 2" class="accent-brand-dark w-4 h-4"><span class="text-sm font-bold text-slate-700">Tim 2</span></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pt-6 flex justify-end">
+                                <button type="button" onclick="nextStep(2)" class="bg-brand-dark hover:bg-brand-teal text-white font-bold py-3 px-8 rounded-xl transition shadow-md flex items-center gap-2">Lanjut <i class="fa-solid fa-arrow-right"></i></button>
+                            </div>
+                        </div>
+
+                        <!-- STEP 2 (Hanya 2 Peserta Wajib) -->
+                        <div id="step-2" class="space-y-6 hidden animate-fade-in">
+                            <div class="flex justify-between items-end border-b pb-2">
+                                <div>
+                                    <h3 class="text-lg font-bold text-slate-800">Identitas Peserta</h3>
+                                    <p class="text-xs text-slate-500">Sesuai Guidebook, 1 Tim wajib terdiri dari 2 orang.</p>
+                                </div>
+                                <span class="bg-amber-100 text-amber-800 text-[10px] font-bold px-2 py-1 rounded uppercase">Wajib 2 Org</span>
+                            </div>
+
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <!-- Peserta 1 -->
+                                <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-4">
+                                    <h4 class="font-bold text-brand-dark text-sm uppercase flex items-center gap-2"><i class="fa-solid fa-user"></i> Peserta 1 (Ketua)</h4>
+                                    <div>
+                                        <label class="block text-xs font-bold text-slate-700 mb-1">Nama Lengkap <span class="text-rose-500">*</span></label>
+                                        <input type="text" id="nama1" placeholder="Nama Lengkap" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-brand-teal transition">
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-bold text-slate-700 mb-1">No WhatsApp <span class="text-rose-500">*</span></label>
+                                        <input type="tel" id="wa1" placeholder="08xxx" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-brand-teal transition">
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-bold text-slate-700 mb-1">Kelas <span class="text-rose-500">*</span></label>
+                                        <select id="kelas1" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-brand-teal transition appearance-none">
+                                            <option value="" disabled selected>Pilih Kelas</option>
+                                            <option value="X">Kelas X</option>
+                                            <option value="XI">Kelas XI</option>
+                                            <option value="XII">Kelas XII</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- Peserta 2 -->
+                                <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-4">
+                                    <h4 class="font-bold text-brand-dark text-sm uppercase flex items-center gap-2"><i class="fa-solid fa-user"></i> Peserta 2 (Anggota)</h4>
+                                    <div>
+                                        <label class="block text-xs font-bold text-slate-700 mb-1">Nama Lengkap <span class="text-rose-500">*</span></label>
+                                        <input type="text" id="nama2" placeholder="Nama Lengkap" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-brand-teal transition">
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-bold text-slate-700 mb-1">No WhatsApp <span class="text-rose-500">*</span></label>
+                                        <input type="tel" id="wa2" placeholder="08xxx" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-brand-teal transition">
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-bold text-slate-700 mb-1">Kelas <span class="text-rose-500">*</span></label>
+                                        <select id="kelas2" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-brand-teal transition appearance-none">
+                                            <option value="" disabled selected>Pilih Kelas</option>
+                                            <option value="X">Kelas X</option>
+                                            <option value="XI">Kelas XI</option>
+                                            <option value="XII">Kelas XII</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="pt-6 flex justify-between">
+                                <button type="button" onclick="nextStep(1)" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold py-3 px-6 rounded-xl transition flex items-center gap-2"><i class="fa-solid fa-arrow-left"></i> Kembali</button>
+                                <button type="button" onclick="nextStep(3)" class="bg-brand-dark hover:bg-brand-teal text-white font-bold py-3 px-8 rounded-xl transition shadow-md flex items-center gap-2">Lanjut <i class="fa-solid fa-arrow-right"></i></button>
+                            </div>
+                        </div>
+
+                        <!-- STEP 3 -->
+                        <div id="step-3" class="space-y-6 hidden animate-fade-in">
+                            <h3 class="text-lg font-bold text-slate-800 border-b pb-2">Pembayaran (HTM)</h3>
+
+                            <div class="grid md:grid-cols-2 gap-6 items-start">
+                                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5 text-center shadow-inner">
+                                    <span class="text-xs font-bold text-slate-600 uppercase tracking-widest block mb-3">Scan QRIS (Rp140.000 / Tim)</span>
+                                    <div class="bg-white p-3 rounded-xl shadow-sm inline-block w-full max-w-[280px]">
+                                        <!-- UPDATED QRIS IMAGE -->
+                                        <img src="https://iili.io/nRsND5F.jpg" alt="QRIS FIP 2026" class="w-full h-auto rounded-lg border border-slate-100">
+                                    </div>
+                                </div>
+
+                                <div class="space-y-5">
+                                    <div class="bg-brand-light p-4 rounded-xl border border-brand-teal/30 text-brand-dark text-xs leading-relaxed space-y-1.5">
+                                        <p class="font-bold flex items-center gap-2"><i class="fa-solid fa-circle-info"></i> Petunjuk Pembayaran:</p>
+                                        <p>1. Bayar HTM Rp140.000 via QRIS.</p>
+                                        <p>2. Unggah bukti foto (Maksimal 5MB, format gambar/PDF).</p>
+                                        <p>3. Status pembayaran ("Menunggu Validasi") & Link Grup WhatsApp akan dikirim otomatis ke email Anda.</p>
+                                    </div>
+
+                                    <div>
+                                        <label class="block text-xs font-bold text-slate-700 uppercase mb-2">Upload Bukti <span class="text-rose-500">*</span></label>
+                                        <input type="file" id="fileBukti" accept="image/jpeg, image/png, image/jpg, application/pdf" required class="w-full text-sm text-slate-500 bg-slate-50 border border-slate-200 rounded-xl p-2 cursor-pointer focus:outline-none">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="pt-6 border-t border-slate-200 flex flex-col-reverse sm:flex-row justify-between gap-4">
+                                <button type="button" onclick="nextStep(2)" class="w-full sm:w-auto bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold py-3.5 px-6 rounded-xl transition flex items-center justify-center gap-2"><i class="fa-solid fa-arrow-left"></i> Kembali</button>
+                                <button type="submit" id="btnSubmit" class="w-full sm:w-auto bg-brand-dark hover:bg-brand-teal text-white font-extrabold py-3.5 px-10 rounded-xl transition shadow-lg flex items-center justify-center gap-2">
+                                    <i class="fa-solid fa-paper-plane" id="submitIcon"></i> <span id="submitText">KIRIM PENDAFTARAN</span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+
+                    <!-- SUCCESS SCREEN (Hidden Header & Form) -->
+                    <div id="successScreen" class="hidden p-8 sm:p-16 text-center bg-white">
+                        <div class="w-24 h-24 bg-emerald-100 text-emerald-500 rounded-full flex items-center justify-center mx-auto text-5xl mb-6 shadow-inner">
+                            <i class="fa-solid fa-check"></i>
+                        </div>
+                        <h2 class="text-3xl font-extrabold text-slate-900 mb-2">Pendaftaran Terkirim!</h2>
+                        <p class="text-slate-600 mb-8">Terima kasih, data dan file Anda telah tersimpan dengan aman di database FIP 2026.</p>
+
+                        <!-- CALL TO ACTION GROUP WA -->
+                        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 mb-8 max-w-lg mx-auto shadow-xl">
+                            <span class="bg-emerald-500 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-3 inline-block animate-pulse">Langkah Wajib Selanjutnya</span>
+                            <h4 class="font-bold text-white text-lg mb-4">Bergabung ke Group WhatsApp</h4>
+                            <p class="text-xs text-slate-400 mb-5">Seluruh informasi kompetisi & Coaching Clinic akan disampaikan melalui grup ini.</p>
+                            <a href="https://chat.whatsapp.com/EhoZhLBmTgr5U7ktAcTbG7" target="_blank" class="block w-full bg-[#25D366] hover:bg-[#20bd5a] text-white font-extrabold py-4 rounded-xl shadow-md transition flex justify-center items-center gap-2 text-sm sm:text-base">
+                                <i class="fa-brands fa-whatsapp text-2xl"></i> GABUNG GROUP PESERTA
+                            </a>
+                        </div>
+
+                        <div class="bg-slate-50 border border-slate-200 p-5 rounded-2xl max-w-lg mx-auto text-left text-sm text-slate-700 space-y-2 shadow-sm">
+                            <p class="font-bold text-brand-dark mb-1 flex items-center gap-2"><i class="fa-solid fa-envelope-circle-check text-lg"></i> Email Konfirmasi Diterbitkan</p>
+                            <p class="text-xs">Rincian identitas dan status validasi telah dikirimkan ke email: <strong id="resEmail" class="break-all text-brand-dark"></strong></p>
+                            <hr class="my-3 border-slate-200">
+                            <p class="text-xs"><strong>Sekolah:</strong> <span id="resSekolah"></span></p>
+                            <p class="text-xs"><strong>Kategori:</strong> <span id="resTim"></span></p>
+                            <p class="text-xs"><strong>Ketua:</strong> <span id="resKetua"></span></p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-900 pt-16 pb-8 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+                <!-- Brand -->
+                <div>
+                    <div class="flex items-center space-x-3 mb-6">
+                        <img src="https://iili.io/nAJ6FF2.png" alt="FOSCA" class="h-8 w-auto brightness-0 invert">
+                        <span class="h-5 w-[1px] bg-white/20"></span>
+                        <img src="https://iili.io/nAJanfI.png" alt="FIP" class="h-8 w-auto brightness-0 invert">
+                    </div>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-6">
+                        FOSCA Impact Project (FIP) 2026 adalah kompetisi riset dan Karya Tulis Ilmiah tingkat nasional yang diselenggarakan oleh Forum of Scientish Teenagers.
+                    </p>
+                </div>
+
+                <!-- Links -->
+                <div>
+                    <h4 class="text-white font-bold mb-6 text-lg">Tautan Penting</h4>
+                    <ul class="space-y-3 text-sm text-slate-400">
+                        <li><a href="#tentang" class="hover:text-brand-bright transition"><i class="fa-solid fa-chevron-right text-xs mr-2 opacity-50"></i> Tentang FIP</a></li>
+                        <li><a href="#timeline" class="hover:text-brand-bright transition"><i class="fa-solid fa-chevron-right text-xs mr-2 opacity-50"></i> Timeline Kompetisi</a></li>
+                        <li><a href="#syarat" class="hover:text-brand-bright transition"><i class="fa-solid fa-chevron-right text-xs mr-2 opacity-50"></i> Syarat & Ketentuan</a></li>
+                        <li><a href="https://kirfosca.com/GuidelineFIP26" target="_blank" class="hover:text-brand-bright transition"><i class="fa-solid fa-chevron-right text-xs mr-2 opacity-50"></i> Download Guideline</a></li>
+                        <li><a href="https://kirfosca.com/TwibbonFIP26" target="_blank" class="hover:text-brand-bright transition"><i class="fa-solid fa-chevron-right text-xs mr-2 opacity-50"></i> Download Twibbon</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact -->
+                <div>
+                    <h4 class="text-white font-bold mb-6 text-lg">Layanan Informasi</h4>
+                    <div class="space-y-4">
+                        <a href="https://wa.me/6285772555041" target="_blank" class="flex items-center gap-4 bg-slate-800 p-3 rounded-xl hover:bg-slate-700 transition group">
+                            <div class="w-10 h-10 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xl group-hover:bg-emerald-500 group-hover:text-white transition"><i class="fa-brands fa-whatsapp"></i></div>
+                            <div>
+                                <p class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Contact Person 1</p>
+                                <p class="font-bold text-white text-sm">Malika (0857-7255-5041)</p>
+                            </div>
+                        </a>
+                        <a href="https://wa.me/6285883204796" target="_blank" class="flex items-center gap-4 bg-slate-800 p-3 rounded-xl hover:bg-slate-700 transition group">
+                            <div class="w-10 h-10 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xl group-hover:bg-emerald-500 group-hover:text-white transition"><i class="fa-brands fa-whatsapp"></i></div>
+                            <div>
+                                <p class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Contact Person 2</p>
+                                <p class="font-bold text-white text-sm">Neila (0858-8320-4796)</p>
+                            </div>
+                        </a>
+                        <div class="flex items-center gap-3 pt-2">
+                            <a href="mailto:humas.fosca@gmail.com" class="text-slate-400 hover:text-white text-sm transition flex items-center gap-2"><i class="fa-solid fa-envelope"></i> humas.fosca@gmail.com</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-500">
+                <p>&copy; 2026 Forum of Scientish Teenagers (FOSCA). All rights reserved.</p>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-slate-400 hover:text-brand-bright transition text-lg"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="text-slate-400 hover:text-brand-bright transition text-lg"><i class="fa-brands fa-tiktok"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script>
+        // ==========================================
+        // URL APPS SCRIPT (FINAL)
+        // ==========================================
+        const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxWVOg34o8fiHKyp7WPPZBP3N50rDs5RsRugvL00nGQvszsxHQsraR44mG-XVJmTuRz/exec";
+
+        // Mobile Menu Logic
+        const btn = document.getElementById('mobileMenuBtn');
+        const menu = document.getElementById('mobileMenu');
+        const icon = document.getElementById('menuIcon');
+        
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+            icon.className = menu.classList.contains('hidden') ? "fa-solid fa-bars text-xl" : "fa-solid fa-xmark text-xl";
+        });
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.add('hidden');
+                icon.className = "fa-solid fa-bars text-xl";
+            });
+        });
+
+        function scrollToForm() {
+            document.getElementById('pendaftaran').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Countdown Logic (Target: 13 Oct 2026)
+        function startCountdown() {
+            const target = new Date("October 13, 2026 23:59:59").getTime();
+            setInterval(() => {
+                const now = new Date().getTime();
+                const dist = target - now;
+                if (dist < 0) return;
+                
+                document.getElementById('cd-days').innerText = Math.floor(dist / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
+                document.getElementById('cd-hours').innerText = Math.floor((dist % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
+                document.getElementById('cd-mins').innerText = Math.floor((dist % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+                document.getElementById('cd-secs').innerText = Math.floor((dist % (1000 * 60)) / 1000).toString().padStart(2, '0');
+            }, 1000);
+        }
+        startCountdown();
+
+        // Topic Logic
+        const topics = {
+            1: { b: "Subtema A", t: "Waste & Circular Economy", d: "Penelitian dan inovasi terkait pengelolaan sampah, daur ulang, serta penerapan prinsip ekonomi sirkular." },
+            2: { b: "Subtema B", t: "Pollution & Environmental Health", d: "Penelitian mengenai pencegahan serta penanganan pencemaran dan dampaknya terhadap kesehatan lingkungan." },
+            3: { b: "Subtema C", t: "Climate & Energy", d: "Penelitian mengenai mitigasi dan adaptasi perubahan iklim serta inovasi energi terbarukan." },
+            4: { b: "Subtema D", t: "Biodiversity & Conservation", d: "Penelitian mengenai perlindungan keanekaragaman hayati, konservasi ekosistem, dan pelestarian alam." },
+            5: { b: "Subtema E", t: "Sustainable Society & Lifestyle", d: "Penelitian mengenai gaya hidup berkelanjutan, pemberdayaan masyarakat, dan solusi sosial untuk lingkungan." }
+        };
+
+        function selectTopic(num) {
+            document.getElementById('topic-badge').innerText = topics[num].b;
+            document.getElementById('topic-title').innerText = topics[num].t;
+            document.getElementById('topic-desc').innerText = topics[num].d;
+            
+            for(let i=1; i<=5; i++){
+                const btn = document.getElementById(`btn-topik-${i}`);
+                if(i===num) btn.className = "topic-btn w-full text-left px-5 py-4 rounded-2xl font-bold text-sm border-2 transition-all bg-brand-dark text-white border-brand-dark shadow-md flex items-center justify-between";
+                else btn.className = "topic-btn w-full text-left px-5 py-4 rounded-2xl font-bold text-sm border-2 transition-all bg-white text-slate-600 border-slate-200 hover:border-brand-teal flex items-center justify-between";
+            }
+        }
+
+        // Form Logic
+        function showAlert(msg) {
+            const alert = document.getElementById('formAlert');
+            document.getElementById('formAlertText').innerHTML = `<i class="fa-solid fa-circle-exclamation text-rose-500"></i> ${msg}`;
+            alert.classList.remove('hidden');
+            document.getElementById('formHeader').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        let currentStep = 1;
+        function nextStep(step) {
+            document.getElementById('formAlert').classList.add('hidden');
+
+            if (step > 1 && currentStep === 1) {
+                const req1 = ['email', 'nomorCP', 'asalSekolah', 'linkTwibbon', 'sumberInfo'];
+                let isValid = true;
+                req1.forEach(id => { if(!document.getElementById(id).value.trim()) isValid = false; });
+                const r1 = document.querySelector('input[name="perwakilanKIR"]:checked');
+                const r2 = document.querySelector('input[name="pilihanTim"]:checked');
+                if (!isValid || !r1 || !r2) return showAlert('Mohon lengkapi semua data dan pilihan di Tahap 1.');
+            }
+
+            if (step > 2 && currentStep === 2) {
+                const req2 = ['nama1', 'wa1', 'kelas1', 'nama2', 'wa2', 'kelas2'];
+                let isValid = true;
+                req2.forEach(id => { if(!document.getElementById(id).value.trim()) isValid = false; });
+                if (!isValid) return showAlert('Mohon lengkapi data lengkap Ketua (Peserta 1) & Anggota (Peserta 2).');
+            }
+
+            for(let i=1; i<=3; i++) {
+                document.getElementById(`step-${i}`).classList.add('hidden');
+                const ind = document.getElementById(`step-ind-${i}`);
+                const badge = document.getElementById(`step-badge-${i}`);
+                if (i <= step) {
+                    ind.classList.remove('opacity-50');
+                    badge.classList.remove('bg-slate-800/50');
+                    badge.classList.add('bg-white', 'text-brand-dark');
+                } else {
+                    ind.classList.add('opacity-50');
+                    badge.classList.remove('bg-white', 'text-brand-dark');
+                    badge.classList.add('bg-slate-800/50', 'text-white');
+                }
+            }
+            
+            document.getElementById(`step-${step}`).classList.remove('hidden');
+            currentStep = step;
+            document.getElementById('formHeader').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        function getBase64(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = () => resolve(reader.result.split(',')[1]);
+                reader.onerror = error => reject(error);
+                reader.readAsDataURL(file);
+            });
+        }
+
+        async function submitForm(e) {
+            e.preventDefault();
+            document.getElementById('formAlert').classList.add('hidden');
+
+            const fileInput = document.getElementById('fileBukti');
+            if (!fileInput.files[0]) return showAlert('Unggah bukti pembayaran terlebih dahulu.');
+            
+            const file = fileInput.files[0];
+            if (file.size > 5242880) return showAlert('Ukuran file maksimal 5MB agar tidak gagal saat dikirim via HP.');
+
+            const btn = document.getElementById('btnSubmit');
+            const icon = document.getElementById('submitIcon');
+            const text = document.getElementById('submitText');
+
+            btn.disabled = true;
+            btn.classList.add('opacity-70', 'cursor-not-allowed');
+            icon.className = "fa-solid fa-spinner fa-spin";
+            text.innerText = "MENGIRIM...";
+
+            try {
+                const base64Data = await getBase64(file);
+                const data = {
+                    email: document.getElementById('email').value.trim(),
+                    asalSekolah: document.getElementById('asalSekolah').value.trim(),
+                    nomorCP: document.getElementById('nomorCP').value.trim(),
+                    sumberInfo: document.getElementById('sumberInfo').value,
+                    linkTwibbon: document.getElementById('linkTwibbon').value.trim(),
+                    perwakilanKIR: document.querySelector('input[name="perwakilanKIR"]:checked').value,
+                    pilihanTim: document.querySelector('input[name="pilihanTim"]:checked').value,
+                    
+                    nama1: document.getElementById('nama1').value.trim(),
+                    wa1: document.getElementById('wa1').value.trim(),
+                    kelas1: document.getElementById('kelas1').value,
+                    
+                    nama2: document.getElementById('nama2').value.trim(),
+                    wa2: document.getElementById('wa2').value.trim(),
+                    kelas2: document.getElementById('kelas2').value,
+                    
+                    fileData: base64Data,
+                    fileName: file.name,
+                    mimeType: file.type
+                };
+
+                // Mode 'no-cors' + text/plain to entirely bypass browser CORS blocking
+                await fetch(APPS_SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    body: JSON.stringify(data),
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' }
+                });
+
+                // Hide Form & Show Success Screen
+                document.getElementById('formHeader').classList.add('hidden');
+                document.getElementById('fipForm').classList.add('hidden');
+                
+                document.getElementById('resEmail').innerText = data.email;
+                document.getElementById('resSekolah').innerText = data.asalSekolah;
+                document.getElementById('resTim').innerText = `${data.pilihanTim} (${data.perwakilanKIR})`;
+                document.getElementById('resKetua').innerText = data.nama1;
+
+                document.getElementById('successScreen').classList.remove('hidden');
+                document.getElementById('pendaftaran').scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+            } catch (err) {
+                console.error(err);
+                showAlert("Gagal terhubung ke server. Pastikan internet stabil dan coba lagi.");
+                btn.disabled = false;
+                btn.classList.remove('opacity-70', 'cursor-not-allowed');
+                icon.className = "fa-solid fa-paper-plane";
+                text.innerText = "KIRIM PENDAFTARAN";
+            }
+        }
+    </script>
+</body>
+</html>
