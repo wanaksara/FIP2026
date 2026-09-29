@@ -725,7 +725,7 @@
         // ==========================================
         // URL APPS SCRIPT (FINAL)
         // ==========================================
-        const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxWVOg34o8fiHKyp7WPPZBP3N50rDs5RsRugvL00nGQvszsxHQsraR44mG-XVJmTuRz/exec";
+        const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxS-iHVsIiAA2V3jxzsJILr79qlVpkcnJNpQUz9QkIeHxmfJ-wSsy67YIVRSL6IPXT9/exec";
 
         // Mobile Menu Logic
         const btn = document.getElementById('mobileMenuBtn');
