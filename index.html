@@ -61,13 +61,7 @@
             -webkit-text-fill-color: transparent;
         }
 
-        .text-gradient-gold {
-            background: linear-gradient(135deg, #D97706 0%, #FBBF24 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        /* File Input Styling */
+        /* File Input Styling (Mobile Friendly) */
         input[type="file"]::file-selector-button {
             border: none;
             background: #005461;
@@ -118,14 +112,20 @@
         </div>
 
         <!-- Mobile Menu -->
-        <div id="mobileMenu" class="hidden md:hidden bg-white border-b border-slate-200 px-4 pt-2 pb-6 space-y-2 shadow-lg absolute w-full">
+        <div id="mobileMenu" class="hidden md:hidden bg-white border-b border-slate-200 px-4 pt-2 pb-6 space-y-2 shadow-lg absolute w-full z-40">
             <a href="#tentang" class="mobile-link block py-3 px-4 rounded-xl text-slate-700 font-bold hover:bg-slate-50"><i class="fa-solid fa-circle-info text-brand-teal w-6"></i> Tentang FIP</a>
             <a href="#timeline" class="mobile-link block py-3 px-4 rounded-xl text-slate-700 font-bold hover:bg-slate-50"><i class="fa-solid fa-calendar-days text-brand-teal w-6"></i> Timeline</a>
             <a href="#syarat" class="mobile-link block py-3 px-4 rounded-xl text-slate-700 font-bold hover:bg-slate-50"><i class="fa-solid fa-list-check text-brand-teal w-6"></i> Syarat & Ketentuan</a>
             <a href="#benefit" class="mobile-link block py-3 px-4 rounded-xl text-slate-700 font-bold hover:bg-slate-50"><i class="fa-solid fa-gift text-brand-teal w-6"></i> Benefit & Hadiah</a>
-            <button onclick="scrollToForm(); document.getElementById('mobileMenu').classList.add('hidden'); document.getElementById('menuIcon').className = 'fa-solid fa-bars text-xl';" class="w-full mt-4 py-3 px-4 rounded-xl bg-brand-dark text-white font-bold text-center shadow-md flex items-center justify-center gap-2">
-                <i class="fa-solid fa-pen-to-square"></i> Formulir Pendaftaran
-            </button>
+            
+            <div class="pt-4 space-y-2">
+                <button onclick="scrollToForm(); document.getElementById('mobileMenu').classList.add('hidden'); document.getElementById('menuIcon').className = 'fa-solid fa-bars text-xl';" class="w-full py-3 px-4 rounded-xl bg-brand-dark text-white font-bold text-center shadow-md flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-user-plus"></i> Pendaftaran FIP 2026
+                </button>
+                <a href="https://wanaksara.github.io/submitabstractfip/" target="_blank" class="w-full py-3 px-4 rounded-xl bg-emerald-600 text-white font-bold text-center shadow-md flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-file-arrow-up"></i> Submit Abstrak
+                </a>
+            </div>
         </div>
     </header>
 
@@ -157,15 +157,22 @@
                 </div>
 
                 <!-- Action Buttons -->
-                <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12 opacity-0 animate-fade-in" style="animation-delay: 0.4s;">
+                <div class="flex flex-wrap items-center justify-center gap-3 sm:gap-4 mb-12 opacity-0 animate-fade-in" style="animation-delay: 0.4s;">
+                    <!-- Tombol Daftar -->
                     <button onclick="scrollToForm()" class="w-full sm:w-auto bg-brand-dark hover:bg-brand-teal text-white font-extrabold text-sm px-8 py-4 rounded-xl shadow-lg transition transform hover:-translate-y-1 flex items-center justify-center gap-2">
-                        <i class="fa-solid fa-paper-plane"></i> Daftar Sekarang
+                        <i class="fa-solid fa-user-plus"></i> Daftar Registrasi
                     </button>
-                    <a href="https://kirfosca.com/GuidelineFIP26" target="_blank" class="w-full sm:w-auto bg-white hover:bg-slate-50 border-2 border-slate-200 text-slate-700 font-bold text-sm px-8 py-4 rounded-xl transition flex items-center justify-center gap-2">
-                        <i class="fa-solid fa-book text-brand-teal"></i> Download Guideline
+                    <!-- Tombol Submit Abstrak -->
+                    <a href="https://wanaksara.github.io/submitabstractfip/" target="_blank" class="w-full sm:w-auto bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-sm px-8 py-4 rounded-xl shadow-lg transition transform hover:-translate-y-1 flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-file-arrow-up"></i> Kirim Abstrak
                     </a>
-                    <a href="https://kirfosca.com/TwibbonFIP26" target="_blank" class="w-full sm:w-auto bg-white hover:bg-slate-50 border-2 border-slate-200 text-slate-700 font-bold text-sm px-8 py-4 rounded-xl transition flex items-center justify-center gap-2">
-                        <i class="fa-solid fa-image text-brand-teal"></i> Download Twibbon
+                    <!-- Tombol Guideline -->
+                    <a href="https://kirfosca.com/GuidelineFIP26" target="_blank" class="w-full sm:w-auto bg-white hover:bg-slate-50 border-2 border-slate-200 text-slate-700 font-bold text-sm px-6 py-4 rounded-xl transition flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-book text-brand-teal"></i> Guideline
+                    </a>
+                    <!-- Tombol Twibbon -->
+                    <a href="https://kirfosca.com/TwibbonFIP26" target="_blank" class="w-full sm:w-auto bg-white hover:bg-slate-50 border-2 border-slate-200 text-slate-700 font-bold text-sm px-6 py-4 rounded-xl transition flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-image text-brand-teal"></i> Twibbon
                     </a>
                 </div>
 
@@ -174,7 +181,7 @@
                     <div class="text-xs font-bold text-brand-bright uppercase tracking-widest mb-4 flex items-center justify-center gap-2">
                         <i class="fa-solid fa-hourglass-half animate-spin-slow"></i> Batas Akhir Pengumpulan Abstrak (13 OKT 2026)
                     </div>
-                    <div class="grid grid-cols-4 gap-3 sm:gap-4 text-center">
+                    <div class="grid grid-cols-4 gap-3 sm:gap-4 text-center" id="countdown-timer">
                         <div class="bg-slate-800 p-3 rounded-2xl border border-slate-700">
                             <span class="text-2xl sm:text-4xl font-black block" id="cd-days">00</span>
                             <span class="text-[10px] sm:text-xs text-slate-400 font-bold uppercase mt-1 block">Hari</span>
@@ -204,7 +211,7 @@
                         <span class="text-brand-dark font-bold text-xs uppercase tracking-widest bg-brand-light px-3 py-1.5 rounded-full mb-4 inline-block">Tentang FIP</span>
                         <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mb-6 leading-tight">Wadah Inovasi Riset Bagi Peneliti Muda Indonesia</h2>
                         <p class="text-slate-600 mb-4 text-sm sm:text-base leading-relaxed text-justify">
-                            <strong>FOSCA IMPACT PROJECT (FIP) 2026</strong> merupakan program kerja inovatif FOSCA Angkatan 20 yang dikemas dalam bentuk kompetisi riset dan Karya Tulis Ilmiah (KTI). Nama ini merepresentasikan semangat FOSCA dalam mendorong pelajar untuk tidak hanya mengidentifikasi permasalahan, tetapi juga mengembangkan gagasan dan solusi berbasis penelitian yang dapat memberikan dampak nyata.
+                            <strong>FOSCA IMPACT PROJECT (FIP) 2026</strong> merupakan program kerja inovatif FOSCA Angkatan 20 yang dikemas dalam bentuk kompetisi riset dan Karya Tulis Ilmiah (KTI). Nama ini merepresentasikan semangat FOSCA dalam mendorong pelajar untuk tidak hanya mengidentifikasi permasalahan, tetapi juga mengembangkan gagasan dan solusi berbasis penelitian yang dapat memberikan dampak nyata bagi lingkungan dan masyarakat.
                         </p>
                         <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm mt-6">
                             <h4 class="font-bold text-slate-900 mb-3 flex items-center gap-2"><i class="fa-solid fa-cubes text-brand-teal"></i> Bentuk Karya</h4>
@@ -348,7 +355,7 @@
 
         <!-- SYARAT SECTION -->
         <section id="syarat" class="py-16 sm:py-24 bg-white">
-            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-10">
                     <h2 class="text-3xl font-extrabold text-slate-900 flex items-center justify-center gap-3">
                         <i class="fa-solid fa-list-check text-brand-teal"></i> Syarat & Ketentuan Peserta
@@ -357,16 +364,16 @@
                 
                 <div class="bg-slate-50 border border-slate-200 rounded-3xl p-6 sm:p-10 shadow-sm">
                     <ul class="space-y-4 text-sm sm:text-base text-slate-700">
-                        <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-brand-teal mt-1"></i> <span>Peserta merupakan siswa/i aktif SMA/SMK/MA sederajat.</span></li>
-                        <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-brand-teal mt-1"></i> <span>Peserta mengikuti kompetisi dalam tim yang terdiri dari <strong>2 orang</strong>. 1 sekolah maksimal mengirimkan <strong>2 tim</strong>.</span></li>
-                        <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-brand-teal mt-1"></i> <span>Setiap tim wajib mengangkat penelitian yang sesuai dengan tema dan isu FIP 2026.</span></li>
-                        <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-brand-teal mt-1"></i> <span>Setiap anggota tim <strong>wajib upload twibbon</strong>.</span></li>
-                        <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-brand-teal mt-1"></i> <span>Karya yang dikumpulkan harus merupakan karya orisinal dan belum pernah menjadi juara dalam kompetisi lain.</span></li>
-                        <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-brand-teal mt-1"></i> <span>Dilarang melakukan plagiarisme, termasuk menyalin karya, data, ide, atau tulisan pihak lain tanpa mencantumkan sumber.</span></li>
-                        <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-brand-teal mt-1"></i> <span>Setiap sumber yang digunakan dalam penelitian wajib dicantumkan sesuai kaidah sitasi.</span></li>
-                        <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-brand-teal mt-1"></i> <span>Data dan hasil penelitian harus jujur, dapat dipertanggungjawabkan, dan tidak direkayasa.</span></li>
-                        <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-brand-teal mt-1"></i> <span>Peserta wajib mengikuti seluruh tahapan dan ketentuan kompetisi sesuai timeline yang telah ditetapkan.</span></li>
-                        <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-brand-teal mt-1"></i> <span>Peserta wajib mengikuti Coaching Clinic dan tahapan seleksi sesuai ketentuan panitia. Keputusan dewan juri bersifat final dan tidak dapat diganggu gugat.</span></li>
+                        <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-brand-teal mt-1"></i> <span>1. Peserta merupakan siswa/i aktif SMA/SMK/MA sederajat.</span></li>
+                        <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-brand-teal mt-1"></i> <span>2. Peserta mengikuti kompetisi dalam tim yang terdiri dari 2 orang. 1 sekolah maksimal mengirimkan 2 tim.</span></li>
+                        <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-brand-teal mt-1"></i> <span>3. Setiap tim wajib mengangkat penelitian yang sesuai dengan tema dan isu FIP 2026.</span></li>
+                        <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-brand-teal mt-1"></i> <span>4. Karya yang dikumpulkan harus merupakan karya orisinal dan belum pernah menjadi juara dalam kompetisi lain.</span></li>
+                        <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-brand-teal mt-1"></i> <span>5. Dilarang melakukan plagiarisme, termasuk menyalin karya, data, ide, atau tulisan pihak lain tanpa mencantumkan sumber.</span></li>
+                        <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-brand-teal mt-1"></i> <span>6. Setiap sumber yang digunakan dalam penelitian wajib dicantumkan sesuai kaidah sitasi.</span></li>
+                        <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-brand-teal mt-1"></i> <span>7. Data dan hasil penelitian harus jujur, dapat dipertanggungjawabkan, dan tidak direkayasa.</span></li>
+                        <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-brand-teal mt-1"></i> <span>8. Peserta wajib mengikuti seluruh tahapan dan ketentuan kompetisi sesuai timeline yang telah ditetapkan.</span></li>
+                        <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-brand-teal mt-1"></i> <span>9. Peserta wajib mengikuti Coaching Clinic dan tahapan seleksi sesuai ketentuan panitia.</span></li>
+                        <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check text-brand-teal mt-1"></i> <span>10. Keputusan dewan juri bersifat final dan tidak dapat diganggu gugat.</span></li>
                     </ul>
                     <div class="mt-8 p-4 bg-amber-50 border border-amber-200 rounded-xl text-center">
                         <p class="font-extrabold text-amber-800 text-base sm:text-lg">Setiap Tim dikenakan biaya pendaftaran (HTM) sebesar Rp140.000</p>
@@ -391,8 +398,8 @@
                         <ul class="space-y-3 text-sm text-slate-300 flex-1">
                             <li class="flex items-start gap-3"><i class="fa-solid fa-check text-emerald-400 mt-1"></i> <span>Sertifikat Peserta FIP 2026</span></li>
                             <li class="flex items-start gap-3"><i class="fa-solid fa-check text-emerald-400 mt-1"></i> <span>Kesempatan mengikuti Coaching Clinic bersama Medalis OPSI 2025</span></li>
-                            <li class="flex items-start gap-3"><i class="fa-solid fa-check text-emerald-400 mt-1"></i> <span>PPT/materi Coaching Clinic</span></li>
-                            <li class="flex items-start gap-3"><i class="fa-solid fa-check text-emerald-400 mt-1"></i> <span>Pengalaman & insight mengembangkan penelitian</span></li>
+                            <li class="flex items-start gap-3"><i class="fa-solid fa-check text-emerald-400 mt-1"></i> <span>PPT/materi Coaching Clinic yang dapat digunakan sebagai bahan pembelajaran</span></li>
+                            <li class="flex items-start gap-3"><i class="fa-solid fa-check text-emerald-400 mt-1"></i> <span>Kesempatan memperoleh pengalaman & insight dalam mengembangkan penelitian</span></li>
                         </ul>
                     </div>
 
@@ -405,10 +412,10 @@
                             <li class="flex items-start gap-3"><i class="fa-solid fa-check text-brand-bright mt-1"></i> <span>Sertifikat Finalis</span></li>
                             <li class="flex items-start gap-3"><i class="fa-solid fa-check text-brand-bright mt-1"></i> <span>Official FIP ID Card & Lanyard</span></li>
                             <li class="flex items-start gap-3"><i class="fa-solid fa-check text-brand-bright mt-1"></i> <span>Official Souvenir FIP</span></li>
-                            <li class="flex items-start gap-3"><i class="fa-solid fa-check text-brand-bright mt-1"></i> <span>KTI Exhibition (Pameran Karya)</span></li>
+                            <li class="flex items-start gap-3"><i class="fa-solid fa-check text-brand-bright mt-1"></i> <span>KTI Exhibition dan memamerkan hasil penelitian</span></li>
                             <li class="flex items-start gap-3"><i class="fa-solid fa-check text-brand-bright mt-1"></i> <span>Lunch box Grand Final</span></li>
-                            <li class="flex items-start gap-3"><i class="fa-solid fa-check text-brand-bright mt-1"></i> <span>Insight dan feedback dari Dewan Juri</span></li>
-                            <li class="flex items-start gap-3"><i class="fa-solid fa-check text-brand-bright mt-1"></i> <span>Networking opportunity dengan peneliti muda, juri & narasumber</span></li>
+                            <li class="flex items-start gap-3"><i class="fa-solid fa-check text-brand-bright mt-1"></i> <span>Kesempatan memperoleh insight dan feedback dari Dewan Juri</span></li>
+                            <li class="flex items-start gap-3"><i class="fa-solid fa-check text-brand-bright mt-1"></i> <span>Networking opportunity dengan sesama peneliti muda, juri & narasumber</span></li>
                         </ul>
                     </div>
 
@@ -595,7 +602,6 @@
                                 <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5 text-center shadow-inner">
                                     <span class="text-xs font-bold text-slate-600 uppercase tracking-widest block mb-3">Scan QRIS (Rp140.000 / Tim)</span>
                                     <div class="bg-white p-3 rounded-xl shadow-sm inline-block w-full max-w-[280px]">
-                                        <!-- UPDATED QRIS IMAGE -->
                                         <img src="https://iili.io/nRsND5F.jpg" alt="QRIS FIP 2026" class="w-full h-auto rounded-lg border border-slate-100">
                                     </div>
                                 </div>
@@ -610,7 +616,8 @@
 
                                     <div>
                                         <label class="block text-xs font-bold text-slate-700 uppercase mb-2">Upload Bukti <span class="text-rose-500">*</span></label>
-                                        <input type="file" id="fileBukti" accept="image/jpeg, image/png, image/jpg, application/pdf" required class="w-full text-sm text-slate-500 bg-slate-50 border border-slate-200 rounded-xl p-2 cursor-pointer focus:outline-none">
+                                        <!-- MOBILE SAFE UPLOAD INPUT -->
+                                        <input type="file" id="fileBukti" accept=".jpg,.jpeg,.png,.pdf" required class="w-full text-sm text-slate-500 bg-slate-50 border border-slate-200 rounded-xl p-2 cursor-pointer focus:outline-none">
                                     </div>
                                 </div>
                             </div>
@@ -713,8 +720,8 @@
             <div class="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-500">
                 <p>&copy; 2026 Forum of Scientish Teenagers (FOSCA). All rights reserved.</p>
                 <div class="flex space-x-4">
-                    <a href="#" class="text-slate-400 hover:text-brand-bright transition text-lg"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="#" class="text-slate-400 hover:text-brand-bright transition text-lg"><i class="fa-brands fa-tiktok"></i></a>
+                    <a href="https://instagram.com/kirfosca" class="text-slate-400 hover:text-brand-bright transition text-lg"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://tiktok.com/@kir.fosca" class="text-slate-400 hover:text-brand-bright transition text-lg"><i class="fa-brands fa-tiktok"></i></a>
                 </div>
             </div>
         </div>
